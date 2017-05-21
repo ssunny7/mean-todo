@@ -1,0 +1,2 @@
+# rest-basic
+This is a simple NodeJS/ExpressJS app to practice writing a REST API using these frameworks. I've entirely relied on the following tutorial for this - https://hackernoon.com/restful-api-design-with-node-js-26ccf66eab09 - but with changes to the MongoDB schema used in the tutorial. This tutorial is the only complete resource I've found that shows development using NodeJS from the ground up without using any additional scaffolding tools while also explaining the purpose of each line of code. Big thanks to the author!
