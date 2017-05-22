@@ -2,7 +2,7 @@ var express = require('express');
 var app = express();
 var db = require('./db');
 
-var TodoController = require('./todos/TodoController');
-app.use('/todos', TodoController);
+var todoRestVar = require('./backend/todo_rest');
+app.use('/todos', todoRestVar);
 
 module.exports = app;
