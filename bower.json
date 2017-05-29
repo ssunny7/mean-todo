@@ -1,0 +1,14 @@
+{
+  "name": "rest-basic",
+  "description": "Basic NodeJS app to test the writing of a REST API",
+  "main": "app.js",
+  "authors": [
+    "Sunny Shah"
+  ],
+  "license": "ISC",
+  "homepage": "https://github.com/ssunny7/rest-basic",
+  "devDependencies": {
+    "jquery": "^3.2.1",
+    "angular": "angularjs#^1.6.4"
+  }
+}
