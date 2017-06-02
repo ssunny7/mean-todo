@@ -1,8 +1,6 @@
 var app = angular.module('todosApp', []);
 
 app.controller('todosController', function($scope, $http) {
-//function todosController($scope, $http) {
-    console.log('in app.js');
     $scope.todos = {};
 
     $http({
@@ -14,5 +12,4 @@ app.controller('todosController', function($scope, $http) {
     }, function (error) {
         console.log('Angular GET error: ' + error.data);
     });
-//}
 });
