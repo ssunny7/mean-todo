@@ -3,15 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <title>Todos App</title>
+
+    <link rel="stylesheet" href="../bower_components/bootstrap/dist/css/bootstrap.min.css">
+
     <script src="../bower_components/jquery/dist/jquery.min.js"></script>
     <script src="../bower_components/angular/angular.min.js"></script>
     <script src="../app.js"></script>
 </head>
 <body ng-controller="todosController">
 <div>
-    <span>Total: {{todos.length}}</span>
+    <h4 class="btn btn-info btn-lg btn-block">Total Todos in database: {{todos.length}}</h4>
+    <br>
     <ul>
-        <li ng-repeat="todo in todos">Name: {{todo.title}}, {{todo.completed}}</li>
+        <li ng-repeat="todo in todos">
+            <dt class="btn-lg">{{todo.title}}</dt>
+            <dd>{{todo.description}}</dd>
+        </li>
     </ul>
 </div>
 </body>
