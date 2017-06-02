@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html ng-app="todosApp">
+<head>
+    <meta charset="UTF-8">
+    <title>Todos App</title>
+    <script src="../bower_components/jquery/dist/jquery.min.js"></script>
+    <script src="../bower_components/angular/angular.min.js"></script>
+    <script src="../app.js"></script>
+</head>
+<body ng-controller="todosController">
+<div>
+    <span>Total: {{todos.length}}</span>
+    <ul>
+        <li ng-repeat="todo in todos">Name: {{todo.title}}, {{todo.completed}}</li>
+    </ul>
+</div>
+</body>
+</html>

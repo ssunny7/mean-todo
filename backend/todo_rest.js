@@ -1,53 +1,54 @@
-var express = require('express');
-var router = express.Router();
-var bodyParser = require('body-parser');
-router.use(bodyParser.urlencoded({ extended: true }));
+var TodoSchema = require('./todo_schema');
+var path = require('path');
 
-var todo = require('./todo_schema');
+module.exports = function(_app) {
+    _app.post('/api/todos', function(req, res) {
+        TodoSchema.create({
+                title: req.body.title,
+                description: req.body.description,
+                completed: req.body.completed
+            },
+            function(err, todo) {
+                if(err)
+                    return res.status(500).send("The todo could not be added to the database!");
+                return res.status(200).json(todo);
+            });
+    });
 
-router.post('/', function(req, res) {
-   todo.create({
-       title: req.body.title,
-       description: req.body.description,
-       completed: req.body.completed
-   },
-   function(err, todo) {
-       if(err)
-           return res.status(500).send("The todo could not be added to the database!");
-       return res.status(200).send(todo);
-   });
-});
+    _app.get('/api/todos', function(req, res) {
+        TodoSchema.find({}, function(err, todos) {
+            console.log('API GET; data: ' + todos);
+            if(err)
+                return res.status(500).send("The todos could not be retrieved from the database!");
+            return res.json(todos);
+        });
+    });
 
-router.get('/', function(req, res) {
-   todo.find({}, function(err, todos) {
-       if(err)
-           return res.status(500).send("The todos could not be retrieved from the database!");
-       return res.status(200).send(todos);
-   });
-});
+    _app.get('/api/todos/:id', function(req, res) {
+        TodoSchema.findById(req.params.id, function(err, todo) {
+            if(err)
+                return res.status(500).send("The requested todo was not found in the database!");
+            return res.status(200).json(todo);
+        });
+    });
 
-router.get('/:id', function(req, res) {
-   todo.findById(req.params.id, function(err, todo) {
-       if(err)
-           return res.status(500).send("The requested todo was not found in the database!");
-       return res.status(200).send(todo);
-   });
-});
+    _app.delete('/api/todos/:id', function(req, res) {
+        TodoSchema.findByIdAndRemove(req.params.id, function(err, todo) {
+            if(err)
+                return res.status(500).send("The requested todo could not be deleted from the database!");
+            return res.status(200).json("The todo titled " + todo.title + " was deleted!");
+        });
+    });
 
-router.delete('/:id', function(req, res) {
-   todo.findByIdAndRemove(req.params.id, function(err, todo) {
-       if(err)
-           return res.status(500).send("The requested todo could not be deleted from the database!");
-       return res.status(200).send("The todo titled " + todo.title + " was deleted!");
-   });
-});
+    _app.put('/api/todos/:id', function(req, res) {
+        TodoSchema.findByIdAndUpdate(req.params.id, req.body, {new: true}, function(err, todo) {
+            if(err)
+                return res.status(500).send("The requested todo could not be updated!");
+            return res.status(200).json(todo);
+        });
+    });
 
-router.put('/:id', function(req, res) {
-   todo.findByIdAndUpdate(req.params.id, req.body, {new: true}, function(err, todo) {
-       if(err)
-           return res.status(500).send("The requested todo could not be updated!");
-       return res.status(200).send(todo);
-   });
-});
-
-module.exports = router;
+    _app.get('*', function(req, res){
+        res.sendFile(path.resolve(__dirname + '/../client/views/index.html'));
+    });
+};
