@@ -16,8 +16,11 @@
     <br>
     <ul>
         <li ng-repeat="todo in todos">
-            <dt class="btn-lg">{{todo.title}}</dt>
+            <dt class="btn-lg"><input type="checkbox" disabled="disabled" ng-model="todo.completed"> {{todo.title}}</dt>
             <dd>{{todo.description}}</dd>
+            <dd>&nbsp;</dd>
+            <dd><button type="button" class="btn btn-info" ng-click="deleteToDo(todo._id)">Delete</button></dd>
+            <dd>&nbsp;</dd>
         </li>
     </ul>
 </div>
