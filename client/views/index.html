@@ -24,5 +24,17 @@
         </li>
     </ul>
 </div>
+<div class="row">
+    <div class="text-center">
+        <form>
+            <div class="form-group">
+                <input type="text" class="form-control col-lg-2" placeholder="Enter Todo title" ng-model="newData.title">
+                <input type="text" class="form-control col-lg-8" placeholder="Enter Todo description" ng-model="newData.description">
+                <label class="form-control col-lg-2"><input type="checkbox" ng-model="newData.completed"> Completed</label>
+            </div>
+            <button type="submit" class="btn btn-primary btn-lg col-lg-12" ng-click="createToDo()">Add</button>
+        </form>
+    </div>
+</div>
 </body>
 </html>

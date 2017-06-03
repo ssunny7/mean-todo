@@ -12,7 +12,13 @@ module.exports = function(_app) {
                 console.log('API POST; data: ' + todo);
                 if(err)
                     return res.status(500).send("The todo could not be added to the database!");
-                return res.json(todo);
+
+                TodoSchema.find({}, function(err, todos) {
+                    console.log('API GET after POST; data: ' + todos);
+                    if(err)
+                        return res.status(500).send("The todos after insertion could not be retrieved from the database!");
+                    return res.json(todos);
+                });
             });
     });
 
