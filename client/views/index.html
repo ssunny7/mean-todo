@@ -5,6 +5,11 @@
     <title>Todos App</title>
 
     <link rel="stylesheet" href="../bower_components/bootstrap/dist/css/bootstrap.min.css">
+    <style type="text/css">
+        input[readonly].form-control {
+            background-color: #FFF;
+        }
+    </style>
 
     <script src="../bower_components/jquery/dist/jquery.min.js"></script>
     <script src="../bower_components/angular/angular.min.js"></script>
@@ -16,11 +21,23 @@
     <br>
     <ul>
         <li ng-repeat="todo in todos">
-            <dt class="btn-lg"><input type="checkbox" disabled="disabled" ng-model="todo.completed"> {{todo.title}}</dt>
-            <dd>{{todo.description}}</dd>
-            <dd>&nbsp;</dd>
-            <dd><button type="button" class="btn btn-info" ng-click="deleteToDo(todo._id)">Delete</button></dd>
-            <dd>&nbsp;</dd>
+            <div ng-hide="toEdit.hasOwnProperty(todo._id)">
+                <dt class="btn-lg form-inline"><input type="checkbox" disabled="disabled" ng-model="todo.completed"> {{todo.title}}</dt>
+                <dd>{{todo.description}}</dd>
+                <dd>&nbsp;</dd>
+                <dd><button type="button" class="btn btn-info" ng-click="deleteToDo(todo._id)">Delete</button> <button type="button" class="btn btn-primary" ng-click="setEditForTodo(todo._id, todo)">Edit</button></dd>
+                <dd>&nbsp;</dd>
+            </div>
+            <form class="form-inline" ng-show="toEdit.hasOwnProperty(todo._id)">
+                <input type="text" class="form-control input-sm" ng-value="todo.title">
+                <br><br>
+                <input type="text" class="form-control input-sm" ng-value="todo.description">
+                <br><br>
+                <label><input type="checkbox" disabled="todo.completed"> Completed</label>&nbsp;&nbsp;&nbsp;
+                <button type="submit" class="btn btn-success" ng-click="saveTodo(todo._id)">Save</button>&nbsp;&nbsp;&nbsp;
+                <button type="button" class="btn btn-danger" ng-click="resetEditForTodo(todo._id)">Cancel</button>
+                <br><br>
+            </form>
         </li>
     </ul>
 </div>

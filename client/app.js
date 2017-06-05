@@ -2,6 +2,7 @@ var app = angular.module('todosApp', []);
 
 app.controller('todosController', function($scope, $http) {
     $scope.todos = {};
+    $scope.toEdit = {};
     $scope.newData = {};
 
     $http({
@@ -39,4 +40,24 @@ app.controller('todosController', function($scope, $http) {
             console.log('Angular DELETE error: ' + error.data);
         });
     };
+
+    $scope.setEditForTodo = function(_id, _todo) {
+        $scope.toEdit[_id] = _todo;
+    };
+
+    $scope.resetEditForTodo = function(_id) {
+        if($scope.toEdit.hasOwnProperty(_id))
+            delete $scope.toEdit[_id];
+    };
+
+    $scope.checkIfTodoEdit = function(_id) {
+        if($scope.toEdit.length > 0 && _id in $scope.toEdit)
+            return "enabled";
+
+        return "disabled";
+    };
+
+    $scope.saveTodo = function(_id) {
+        //fill in
+    }
 });
