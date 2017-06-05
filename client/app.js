@@ -58,6 +58,16 @@ app.controller('todosController', function($scope, $http) {
     };
 
     $scope.saveTodo = function(_id) {
-        //fill in
+        $http({
+            method: 'PUT',
+            url: '/api/todos/' + _id,
+            data: $scope.toEdit[_id]
+        }).then(function (success) {
+            console.log('Angular PUT success: ' + success.data);
+            $scope.resetEditForTodo(_id);
+            $scope.todos = success.data;
+        }, function (error) {
+            console.log('Angular PUT error: ' + error.data);
+        });
     }
 });

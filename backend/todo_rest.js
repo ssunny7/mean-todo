@@ -60,7 +60,13 @@ module.exports = function(_app) {
             console.log('API PUT; data: ' + todo);
             if(err)
                 return res.status(500).send("The requested todo could not be updated!");
-            return res.json(todo);
+
+            TodoSchema.find({}, function(err, todos) {
+                console.log('API GET after PUT; data: ' + todos);
+                if(err)
+                    return res.status(500).send("The todos after updation could not be retrieved from the database!");
+                return res.json(todos);
+            });
         });
     });
 
