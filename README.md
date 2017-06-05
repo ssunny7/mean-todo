@@ -1,2 +1,8 @@
-# rest-basic
-This is a simple NodeJS/ExpressJS app to practice writing a REST API using these frameworks. I've entirely relied on the following tutorial for this - https://hackernoon.com/restful-api-design-with-node-js-26ccf66eab09 - but with changes to the MongoDB schema used in the tutorial. This tutorial is the only complete resource I've found that shows development using NodeJS from the ground up without using any additional scaffolding tools while also explaining the purpose of each line of code. Big thanks to the author!
+# mean-todo
+This is a MEAN webapp that allows one to view and store todos. It is more for me to gain experience in writing a full-stack webapp with all of the MEAN technologies. I've relied on several tutorials to get this working, these are listed below -
+- https://hackernoon.com/restful-api-design-with-node-js-26ccf66eab09 for the backend and REST API
+- https://scotch.io/tutorials/creating-a-single-page-todo-app-with-node-and-angular for the frontend and connecting it with the backend
+
+Of course, the ideas and code from the tutorials has been modified to suit the purposes of my webapp. No scaffolding tools or seed code has been used so that I could understand and implement all the basics of Node/Angular myself.
+
+Unfortunately, none of the tutorials cover inline editing of ng-repeat elements even though they cover all other CRUD operations. I've implemented this aspect myself (with help from stack overflow) while keeping it as simple as possible to aid understanding in the future.
