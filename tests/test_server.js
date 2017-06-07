@@ -1,3 +1,10 @@
+var chai = require('chai');
+var chaiHttp = require('chai-http');
+var server = require('../app');
+var should = chai.should();
+
+chai.use(chaiHttp);
+
 describe('todos', function() {
     it('should list all todos via GET at /api/todos');
     it('should list a single todo via GET at /api/todos/:id');
