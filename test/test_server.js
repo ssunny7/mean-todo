@@ -48,9 +48,32 @@ describe('todos', function() {
             });
     });
 
-    it('should list a single todo via GET at /api/todos/:id');
+    it('should list a single todo via GET at /api/todos/:id', function(done) {
+        var newTodo = new todoSchema({
+            'title': 'Todo X',
+            'description': 'Test todo X',
+            'completed': 'true'
+        });
 
-    /*it('should add a single todo via POST at /api/todos', function(done) {
+        newTodo.save(function (err, data) {
+             chai.request(server)
+                 .get('/api/todos/' + data._id)
+                 .end(function (e, res) {
+                     res.should.have.status(200);
+                     res.should.be.json;
+                     res.body.should.be.a('object');
+                     res.body.should.have.property('title');
+                     res.body.should.have.property('description');
+                     res.body.should.have.property('completed');
+                     res.body.title.should.equal('Todo X');
+                     res.body.description.should.equal('Test todo X');
+                     res.body.completed.should.equal(true);
+                     done();
+                 });
+        });
+    });
+
+    it('should add a single todo via POST at /api/todos', function(done) {
         var curTodoNum = Math.floor(Math.random() * 1000) + 1;
 
         chai.request(server)
@@ -65,7 +88,7 @@ describe('todos', function() {
                 res.body.should.contain.an.item.with.property('completed', false);
                 done();
             });
-    });*/
+    });
 
     it('should delete a single todo via DELETE at /api/todos/:id');
     it('should update a single todo via PUT at /api/todos/:id');
