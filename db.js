@@ -1,2 +1,8 @@
-var mongoose = require('mongoose');
-mongoose.connect('mongodb://ssunny:nodetestdb@ds147821.mlab.com:47821/nodejs-test');
+var config = {};
+
+config.mongoURIs = {
+    development: 'mongodb://ssunny:nodedevdb@ds119772.mlab.com:19772/nodejs-dev',
+    test: 'mongodb://ssunny:nodetestdb@ds119772.mlab.com:19772/nodejs-test'
+};
+
+module.exports = config;

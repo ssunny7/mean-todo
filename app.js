@@ -11,6 +11,18 @@ var morgan = require('morgan');
 /* Get reference to the database module */
 var db = require('./db');
 
+/* Get reference to mongoose to connect to database */
+var mongoose = require('mongoose');
+
+/* Connect to appropriate mongo database depending on what environment variable is set */
+mongoose.connect(db.mongoURIs[app.settings.env], function(err, res) {
+    if(err) {
+        console.log('Error connecting to the database: ' + err);
+    } else {
+        console.log('Connected to database ' + db.mongoURIs[app.settings.env]);
+    }
+});
+
 /* This should be set to enable serving of static content (like for an SPA). Should contain the bower_components, app.js and html files */
 app.use(express.static(__dirname + '/client'));
 
