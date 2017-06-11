@@ -112,5 +112,26 @@ describe('todos', function() {
         });
     });
 
-    it('should update a single todo via PUT at /api/todos/:id');
+    it('should update a single todo via PUT at /api/todos/:id', function(done) {
+        var newTodo = new todoSchema({
+            'title': 'Todo X',
+            'description': 'Test todo X',
+            'completed': 'true'
+        });
+
+        newTodo.save(function (error, data) {
+            chai.request(server)
+                .put('/api/todos/' + data._id)
+                .send({'title': 'Todo XX', 'description': 'Test todo XX', 'completed': 'true'})
+                .end(function (err, res) {
+                    res.should.have.status(200);
+                    res.should.be.json;
+                    res.body.should.be.a('array');
+                    res.body.should.contain.an.item.with.property('title', 'Todo XX');
+                    res.body.should.contain.an.item.with.property('description', 'Test todo XX');
+                    res.body.should.contain.an.item.with.property('completed', true);
+                    done();
+                });
+        });
+    });
 });
