@@ -90,6 +90,27 @@ describe('todos', function() {
             });
     });
 
-    it('should delete a single todo via DELETE at /api/todos/:id');
+    it('should delete a single todo via DELETE at /api/todos/:id', function(done) {
+        var newTodo = new todoSchema({
+            'title': 'Todo X',
+            'description': 'Test todo X',
+            'completed': 'true'
+        });
+
+        newTodo.save(function (error, data) {
+            chai.request(server)
+                .delete('/api/todos/' + data._id)
+                .end(function (e, r) {
+                    r.should.have.status(200);
+                    r.should.be.json;
+                    r.body.should.be.a('array');
+                    r.body.should.not.contain.an.item.with.property('title', 'Test X');
+                    r.body.should.not.contain.an.item.with.property('description', 'Test todo X');
+                    r.body.should.not.contain.an.item.with.property('completed', true);
+                    done();
+                });
+        });
+    });
+
     it('should update a single todo via PUT at /api/todos/:id');
 });
