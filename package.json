@@ -22,10 +22,17 @@
     "mongoose": "^4.10.0"
   },
   "devDependencies": {
+    "angular": "^1.6.4",
+    "angular-mocks": "^1.6.4",
+    "uirouter": "^1.0.3",
     "chai": "^4.0.2",
     "chai-http": "^3.0.0",
     "chai-things": "^0.2.0",
     "ejs": "^2.5.6",
+    "jasmine-core": "^2.6.3",
+    "karma": "^1.7.0",
+    "karma-chrome-launcher": "^2.1.1",
+    "karma-jasmine": "^1.1.0",
     "morgan": "^1.8.2",
     "nodemon": "^1.11.0",
     "path": "^0.12.7"
