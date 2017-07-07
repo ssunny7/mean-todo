@@ -50,4 +50,19 @@ describe('Default Test Suite - todos', function() {
 
         expect(scope.todos).toEqual(_newData);
     });
+
+    it('should delete a todo', function() {
+        /* The comments for each statement remain the same as for the above tests. However, here's a brief overview of the flow.
+         * The when statement says what happens when a request with the given type and URL comes in. Once the controller reference is obtained and the
+         * method in the controller is called, the HTTP request within that method is made (the ID passed here to the method is same as the one used in the URL
+         * when clause and is used to make the HTTP request from the controller). The request is executed once flush is called.
+         * The actions after this happen based on what is defined in the success/error methods of the request handler in the controller and this is checked here at the end. */
+        httpBackend.when('DELETE', '/api/todos/asdf').respond(200, []);
+
+        var ctrl = controller('todosController', {$scope: scope});
+        scope.deleteToDo('asdf');
+        httpBackend.flush();
+
+        expect(scope.todos.length).toEqual(0);
+    });
 });
