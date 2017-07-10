@@ -65,4 +65,28 @@ describe('Default Test Suite - todos', function() {
 
         expect(scope.todos.length).toEqual(0);
     });
+
+    it('should update a todo', function() {
+        /* This test is intended to mimic the user editing a todo. Clicking 'Edit' for a todo sets its value in the toEdit variable, after which it is saved. On completion,
+         * toEdit should thus be empty and the todos variable should have the saved todo. */
+        var _dummyTodo = {'title': 'Mock Todo U', 'description': 'Todo U for mocking', 'completed': true};
+
+        httpBackend.when('PUT', '/api/todos/asdf', _dummyTodo).respond(200, _dummyTodo);
+
+        var ctrl = controller('todosController', {$scope: scope});
+
+        /* Initially, toEdit must be empty. */
+        expect(Object.keys(scope.toEdit).length).toEqual(0);
+        scope.setEditForTodo('asdf', _dummyTodo);
+        /* After clicking 'Edit', toEdit must have one entry containing the dummy todo. */
+        expect(Object.keys(scope.toEdit).length).toEqual(1);
+        expect(scope.toEdit['asdf']).toEqual(_dummyTodo);
+
+        scope.saveTodo('asdf');
+        httpBackend.flush();
+
+        /* After the todo is saved, toEdit must be empty and todos should contain the saved todo. */
+        expect(scope.todos).toEqual(_dummyTodo);
+        expect(Object.keys(scope.toEdit).length).toEqual(0);
+    });
 });
